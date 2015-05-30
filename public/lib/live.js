@@ -31,7 +31,7 @@ var live = function() {
         oldLinkElements = {},
         interval = 250,
         loaded = false,
-        active = { "html": 0, "css": 1, "js": 0 };
+        active = { "html": 1, "css": 1, "js": 0 };
 
     var Live = {
 

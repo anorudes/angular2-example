@@ -6,9 +6,12 @@
 @import '_libs/bourbon/_bourbon.scss';
 @import '_libs/_breakpoint.scss';
 @import '_libs/susy/_susy.scss';
-@import '_partials/base.css';
+
 @import '_partials/sprite.css';
 
-.site {
+.section-main {
   padding: 20px;
+  background: rgba(219,221,217, .7);
+
+  min-height: 100px;
 }
