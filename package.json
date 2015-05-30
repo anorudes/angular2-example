@@ -1,59 +1,45 @@
 {
-  "name": "angularE",
-  "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
-  "dependencies": {
-    "browserify": "^9.0.8",
-    "babelify": "^6.0.2",
-    "gulp": "^3.8.11",
-    "gulp-babel": "^5.1.0",
-    "gulp-autoprefixer": "^2.2.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-coffee": "^1.4.3",
-    "gulp-concat": "^2.4.3",
-    "gulp-concat-css": "^1.1.1",
-    "gulp-connect": "^2.2.0",
-    "gulp-ejs": "^0.2.2",
-    "gulp-declare": "^0.3.0",
-    "gulp-if": "^1.2.5",
-    "gulp-imagemin": "^2.2.1",
-    "gulp-handlebars": "^3.0.1",
-    "gulp-load-plugins": "^0.5.3",
-    "gulp-ng-annotate": "^0.5.3",
-    "gulp-minify-css": "^1.0.0",    
-    "gulp-order": "^1.1.1",
-    "gulp-plumber": "^1.0.0",
-    "gulp-sass": "^1.3.3",
-    "gulp-responsive": "^1.0.7",
-    "gulp-sourcemaps": "^1.5.1",
-    "gulp-streamify": "^0.0.5",
-    "gulp-uglify": "^1.0.2",
-    "gulp-wrap": "^0.5.0",
-    "livereactload": "^0.5.1",
-    "gulp-util": "^2.2.20",
-    "gulp-notify": "^2.2.0",
-    "ng-annotate": "^0.15.4",
-    "gulp.spritesmith": "^3.6.0",
-    "react": "^0.13.2",
-    "vinyl-source-stream": "^1.1.0",
-    "run-sequence": "^1.0.2",
-    "node-sass": "^2.1.1"
-  },
-  "devDependencies": {
-    "coffee-script": "^1.8.0"
-  },
+  "name": "angular2-webpack-starter",
+  "version": "0.0.0",
+  "description": "An Angular 2 Webpack Starter kit featuring Angular 2, Router, TypeScript, and Webpack by AngularClass",
+  "main": "",
   "scripts": {
+    "build": "webpack -d",
+    "watch": "webpack -d --watch",
+    "server": "webpack-dev-server -d --inline --colors --display-error-details --display-cached ",
+    "start": "npm install && npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anorudes/list.git"
+    "url": "https://github.com/gdi2290/angular2-webpack-starter.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "gdi2290 <github@gdi2290.com>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anorudes/list/issues"
+    "url": "https://github.com/gdi2290/angular2-webpack-starter/issues"
   },
-  "homepage": "https://github.com/anorudes/list"
+  "homepage": "https://github.com/gdi2290/angular2-webpack-starter",
+  "dependencies": {
+    "angular2": "2.0.0-alpha.25",
+    "raw-loader": "^0.5.1",
+    "reflect-metadata": "^0.1.0",
+    "rtts_assert": "2.0.0-alpha.25",
+    "zone.js": "^0.5.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.12.1",
+    "exports-loader": "^0.6.2",
+    "expose-loader": "^0.6.0",
+    "file-loader": "^0.8.1",
+    "html-webpack-plugin": "^1.4.0",
+    "imports-loader": "^0.6.3",
+    "json-loader": "^0.5.1",
+    "style-loader": "^0.12.2",
+    "typescript": "^1.5.0-beta",
+    "typescript-simple-loader": "^0.1.2",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.9.6",
+    "webpack-dev-server": "^1.8.2"
+  }
 }

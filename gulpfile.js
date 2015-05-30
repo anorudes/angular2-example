@@ -36,47 +36,17 @@ swallowError = function(error) {
     this.emit('end');
 };
 
-gulp.task('angular', function() {
-  return gulp.src([
-    './src/angular/*.js',
-    './src/angular/controllers/**/*.js',
-    './src/angular/services/**/*.js',
-    './src/angular/directives/**/*.js'
-  ])
-    .pipe(sourcemaps.init())
-        .pipe(concat('bundle.js'))
-        .pipe(ngAnnotate())
-        .pipe(babel()).on('error', swallowError)
-        /* .pipe(uglify()) */
-    .pipe(sourcemaps.write('.'))  
-    .pipe(gulp.dest('js'))
-    .pipe($.connect.reload());
-});
-
-
-gulp.task('sprite', function () {
-  var spriteData = gulp.src('src/sprites/**/*.png').pipe(spritesmith({        
-    imgName: 'sprite.png',
-    retinaSrcFilter: ['src/sprites/2x/*-2x.png'],
-    retinaImgName: 'sprite-2x.png',
-    cssName: 'sprite.css',
-    imgPath: '../img/sprite.png'
-  }));
-
-  spriteData.img
-    .pipe(imagemin())
-    .pipe(gulp.dest('img'));
-
-  spriteData.css      
-      .pipe(gulp.dest('css/_partials'));
-  
-  
+gulp.task("css-min", function() {
+    return gulp.src(["src/css/libs/base.css", "src/css/libs/**/*.css"]).pipe(concat("libs.css")).pipe(minifyCss({
+        keepBreaks: false,
+        processImport: false
+    })).pipe(gulp.dest('public/css'));
 });
 
 
 gulp.task('sass', function() {
     gulp;
-    return gulp.src('css/*.scss').pipe(sourcemaps.init()).pipe(sass({
+    return gulp.src('public/css/*.scss').pipe(sourcemaps.init()).pipe(sass({
         errLogToConsole: false,
         onError: function(err) {
             return notify().write(err);
@@ -89,53 +59,16 @@ gulp.task('sass', function() {
         cascade: false
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest('public/css'));
 });
 
-gulp.task("connect", function() {
-    return $.connect.server({
-        root: ".",
-        port: 1338,
-        livereload: true
-    });
-});
-
-gulp.task('html', function() {
-
-});
-
-gulp.task('build-ejs', function() {
-    return gulp.src(['src/ejs/*.ejs']).pipe($.ejs()).pipe(gulp.dest(out));
-});
-
-gulp.task("jssrc", function() {
-    return gulp.src(['src/js/es6/dist/main.js', "src/js/animate.js", "src/js/tools.js", "src/js/main.js", "src/js/*.js"]).pipe(concat("scripts.js")).pipe(babel()).on('error', swallowError).pipe(gulp.dest(out + 'js'));
-});
-
-gulp.task("scripts", function() {
-    return gulp.src(["src/js/libs/html5.js", "src/js/libs/jquery.browser.js", "src/js/libs/TweenMax.min.js", "src/js/libs/jquery.scrollmagic.min.js", "src/js/libs/jquery.scrollmagic.debug.js", "src/js/libs/motionblur.js", "src/js/libs/modal.js", "src/js/libs/formStone/core.js", "src/js/libs/**/*.js", "!src/js/libs/html5.js", "!src/js/libs/selectivizr-min.js"])
-    .pipe(concat("libs.js"))
-    /*.pipe(uglify()) */
-    .pipe(gulp.dest(out + 'js'));
-});
-
-gulp.task("css-min", function() {
-    return gulp.src(["src/css/libs/base.css", "src/css/libs/**/*.css"]).pipe(concat("libs.css")).pipe(minifyCss({
-        keepBreaks: false,
-        processImport: false
-    })).pipe(gulp.dest(out + 'css'));
-});
 
 
 
 gulp.task('watch', function() {
-    gulp.watch(['src/ejs/**/*.ejs'], ['build-ejs']);
-    gulp.watch(['src/js/libs/**/*.js'], ['scripts']);
-    gulp.watch(['src/js/*.js'], ['jssrc']);
-    gulp.watch(['src/css/libs/*.css'], ['css-min']);
-    gulp.watch(['src/angular/**/*.*'], ['angular']);    
-    gulp.watch(['css/**/*.scss'], ['sass']);        
+    gulp.watch(['css/**/*.scss'], ['sass']);      
+    gulp.watch(['src/css/libs/*.css'], ['css-min']);  
 });
 
 
-gulp.task('default', ['sprite', 'scripts', 'jssrc','angular', 'css-min', 'sass', 'build-ejs', 'connect', 'watch']);
+gulp.task('default', ['sass', 'css-min', 'watch']);
