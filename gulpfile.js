@@ -55,10 +55,16 @@ gulp.task('js', function() {
   .pipe(connect.reload());
 });
 
+gulp.task('reload', function() {  
+  gulp.src("dist/**/*.*")  
+  .pipe(connect.reload());  
+});
+
 gulp.task('watch', function() {
     gulp.watch(['src/css/libs/*.css'], ['css-min']);    
     gulp.watch(['src/css/**/*.scss'], ['sass']);        
     gulp.watch(['src/js/**/*.*'], ['js']);      
+    gulp.watch(['dist/**/*.*'], ['reload']);   
 });
 
 
